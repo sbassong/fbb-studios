@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StudioPage from '../components/pages/StudioPage.astro';
+import { useTranslations, getLangFromUrl } from '../i18n';
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+<BaseLayout routePath="/studio" title={t.studioPage.title}>
+  <StudioPage />
+</BaseLayout>

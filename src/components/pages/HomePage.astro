@@ -1,0 +1,130 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n';
+import { getStudio } from '../../i18n/content';
+import DlaTeaser from '../DlaTeaser.astro';
+import { Image } from 'astro:assets';
+import heroImg from '../../assets/cam-effect-logo.jpg';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const prefix = lang === 'fr' ? '' : '/en';
+const studio = await getStudio(lang);
+
+const talkHeading = lang === 'fr' ? 'Parlons.' : "Let's talk.";
+const talkBody = lang === 'fr'
+  ? 'Presse, casting, collaborations — appelez-nous directement.'
+  : 'Press, casting, collaboration — call us directly.';
+---
+<section class="section section--ink home-hero">
+  <Image class="home-hero__bg" src={heroImg} alt="" aria-hidden="true" fetchpriority="high" loading="eager" widths={[800, 1200, 1920]} sizes="100vw" />
+  <div class="home-hero__overlay" aria-hidden="true"></div>
+  <div class="container">
+    <p class="eyebrow">{t.hero.eyebrow}</p>
+    <h1 class="home-hero__title" aria-label="FBB Studios">
+      <span aria-hidden="true">F</span><span aria-hidden="true">B</span><span aria-hidden="true" class="home-hero__title-mirror">B</span>
+    </h1>
+    <p class="home-hero__name">Studios</p>
+    <p class="home-hero__body">{t.hero.body}</p>
+    <div class="home-hero__ctas">
+      <a class="button" href={prefix === '' ? '/studio' : `${prefix}/studio`}>{t.hero.aboutCta}</a>
+    </div>
+  </div>
+</section>
+
+<DlaTeaser />
+
+<section class="section section--ink home-talk">
+  <div class="container">
+    <p class="eyebrow">{lang === 'fr' ? 'Contact' : 'Contact'}</p>
+    <h2 class="home-talk__heading">{talkHeading}</h2>
+    <p class="home-talk__body">{talkBody}</p>
+    {studio.contact.phone && (
+      <a class="home-talk__phone" href={`tel:${studio.contact.phone.replace(/[\s-]/g, '')}`}>
+        {studio.contact.phone}
+      </a>
+    )}
+  </div>
+</section>
+
+<style>
+  .home-hero {
+    padding-block: clamp(5rem, 12vw, 10rem);
+    position: relative;
+    overflow: hidden;
+  }
+  .home-hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: 62% 45%;
+    transform: scale(1.08);
+    transform-origin: center center;
+  }
+  .home-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(10, 9, 8, 0.96) 0%, rgba(10, 9, 8, 0.75) 30%, rgba(10, 9, 8, 0.35) 54%, rgba(10, 9, 8, 0.08) 72%);
+  }
+  .home-hero > .container {
+    position: relative;
+    z-index: 1;
+  }
+  .home-hero__title {
+    font-size: clamp(5rem, 16vw, 14rem);
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    margin-block: 0.3em 0.15em;
+    display: flex;
+    gap: 0.05em;
+  }
+  .home-hero__title-mirror { display: inline-block; transform: scaleX(-1); }
+  .home-hero__name {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: var(--type-tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--gold-muted);
+    margin-bottom: 2rem;
+  }
+  .home-hero__body {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+    line-height: 1.4;
+    color: var(--bone);
+    max-width: 34ch;
+    margin-bottom: 2.5rem;
+  }
+  .home-hero__ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .home-talk__heading {
+    font-size: clamp(2.5rem, 4vw + 1rem, 4.5rem);
+    color: var(--gold);
+    margin-block: 0.25em;
+  }
+  .home-talk__body {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    max-width: 44ch;
+    margin-bottom: 1.5rem;
+  }
+  .home-talk__phone {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2vw + 1rem, 2.25rem);
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--gold-muted);
+    padding-bottom: 2px;
+  }
+  .home-talk__phone:hover { color: var(--bone); border-color: var(--bone); }
+</style>

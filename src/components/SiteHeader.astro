@@ -1,0 +1,117 @@
+---
+import { useTranslations, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  /** Locale-agnostic route of the current page (e.g. '/', '/studio'). */
+  routePath: string;
+}
+
+const { lang, routePath } = Astro.props;
+const t = useTranslations(lang);
+
+const prefix = lang === 'fr' ? '' : '/en';
+const otherPrefix = lang === 'fr' ? '/en' : '';
+const otherRoute = routePath === '/' ? `${otherPrefix}/` : `${otherPrefix}${routePath}`;
+
+const links = [
+  { href: prefix === '' ? '/' : `${prefix}/`, label: t.nav.home, route: '/' },
+  { href: `${prefix}/studio`, label: t.nav.studio, route: '/studio' },
+] as const;
+---
+<header class="site-header">
+  <div class="site-header__inner container">
+    <a class="site-header__brand" href={prefix === '' ? '/' : `${prefix}/`} aria-label="FBB Studios — accueil">
+      <span class="site-header__wordmark" aria-hidden="true">FBB</span>
+      <span class="site-header__sub">Studios</span>
+    </a>
+    <nav class="site-header__nav" aria-label={t.nav.primaryAria}>
+      <ul>
+        {links.map(({ href, label, route }) => (
+          <li>
+            <a href={href} aria-current={routePath === route ? 'page' : undefined}>{label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <a
+      class="site-header__lang"
+      href={otherRoute}
+      hreflang={lang === 'fr' ? 'en' : 'fr'}
+      aria-label={t.nav.languageToggleAria}
+    >
+      {t.nav.languageToggle}
+    </a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: var(--ink);
+    color: var(--bone);
+    border-bottom: 1px solid var(--ink-soft);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding-block: 1rem;
+  }
+  .site-header__brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+  }
+  .site-header__brand:hover { color: var(--bone); }
+  .site-header__sub {
+    font-size: 0.7rem;
+    letter-spacing: var(--type-tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+  .site-header__nav { margin-inline-start: auto; }
+  .site-header__nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1.5rem;
+  }
+  .site-header__nav a {
+    color: var(--bone);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+  }
+  .site-header__nav a:hover,
+  .site-header__nav a[aria-current="page"] { color: var(--gold); }
+
+  .site-header__lang {
+    color: var(--gold);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--gold-muted);
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  .site-header__lang:hover { background: var(--gold); color: var(--ink); }
+
+  @media (max-width: 640px) {
+    .site-header__inner { flex-wrap: wrap; gap: 1rem; }
+    .site-header__nav { order: 3; flex-basis: 100%; margin-inline-start: 0; }
+    .site-header__nav ul { justify-content: center; }
+    .site-header__lang { margin-inline-start: auto; }
+  }
+</style>

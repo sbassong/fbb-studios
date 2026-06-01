@@ -1,0 +1,90 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import ogDefaultImg from '../assets/reels-hero.jpg';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  /** Locale-agnostic route, e.g. '/', '/studio', '/contact'. Used for hreflang alternates. */
+  routePath: string;
+}
+
+const { title, description, ogImage, routePath } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const pageTitle = title ? `${title} — ${t.meta.siteName}` : t.meta.defaultTitle;
+const pageDescription = description ?? t.meta.defaultDescription;
+
+const site = Astro.site ?? new URL('https://fbbstudios.com');
+const frPath = routePath === '/' ? '/' : routePath;
+const enPath = routePath === '/' ? '/en/' : `/en${routePath}`;
+const frUrl = new URL(frPath, site).toString();
+const enUrl = new URL(enPath, site).toString();
+const canonical = lang === 'fr' ? frUrl : enUrl;
+
+const generatedOg = await getImage({ src: ogDefaultImg, width: 1200, format: 'jpeg', quality: 85 });
+const ogImageUrl = ogImage
+  ? new URL(ogImage, site).toString()
+  : new URL(generatedOg.src, site).toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'FBB Studios',
+  url: site.toString(),
+  logo: new URL('/brand/logo-fbb.jpeg', site).toString(),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'San Francisco',
+    addressCountry: 'USA',
+  },
+  sameAs: ['https://www.instagram.com/FBB_STUDIOS/'],
+};
+---
+<!doctype html>
+<html lang={lang === 'fr' ? 'fr-FR' : 'en-US'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0908" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="fr" href={frUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={frUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content="FBB Studios" />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'fr' ? 'en_US' : 'fr_FR'} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)}></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t.nav.skipToContent}</a>
+    <SiteHeader lang={lang} routePath={routePath} />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter lang={lang} />
+  </body>
+</html>

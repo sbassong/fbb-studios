@@ -1,0 +1,88 @@
+---
+import { useTranslations, type Lang } from '../i18n';
+import { getStudio } from '../i18n/content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const studio = await getStudio(lang);
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="site-footer__inner container">
+    <div class="site-footer__brand">
+      <p class="eyebrow">FBB Studios</p>
+      <p>{t.footer.location}</p>
+    </div>
+    {(studio.social.instagram || studio.social.tiktok || studio.social.youtube) && (
+      <ul class="site-footer__social">
+        {studio.social.instagram && (
+          <li>
+            <a href={studio.social.instagram} rel="me noopener" target="_blank">
+              {t.footer.followInstagram}<span class="visually-hidden"> (opens in new tab)</span>
+            </a>
+          </li>
+        )}
+        {studio.social.tiktok && (
+          <li>
+            <a href={studio.social.tiktok} rel="me noopener" target="_blank">
+              {t.footer.followTikTok}<span class="visually-hidden"> (opens in new tab)</span>
+            </a>
+          </li>
+        )}
+        {studio.social.youtube && (
+          <li>
+            <a href={studio.social.youtube} rel="me noopener" target="_blank">
+              {t.footer.followYoutube}<span class="visually-hidden"> (opens in new tab)</span>
+            </a>
+          </li>
+        )}
+      </ul>
+    )}
+    <p class="site-footer__rights">© {year} FBB Studios. {t.footer.rights}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ink);
+    color: var(--bone);
+    padding-block: 3rem 2rem;
+    border-top: 1px solid var(--ink-soft);
+  }
+  .site-footer__inner {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+  }
+  .site-footer__social {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .site-footer__social a {
+    color: var(--gold);
+    text-decoration: none;
+    font-family: var(--font-display);
+    letter-spacing: 0.04em;
+  }
+  .site-footer__social a:hover { text-decoration: underline; text-decoration-color: currentColor; }
+  .site-footer__rights {
+    grid-column: 1 / -1;
+    color: var(--gold-dim);
+    font-size: 0.85rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--ink-soft);
+    padding-top: 1rem;
+  }
+  @media (max-width: 640px) {
+    .site-footer__inner { grid-template-columns: 1fr; }
+  }
+</style>

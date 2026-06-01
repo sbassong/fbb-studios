@@ -1,0 +1,132 @@
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/400-italic.css";
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/cormorant-garamond/600-italic.css";
+@import "@fontsource/eb-garamond/400.css";
+@import "@fontsource/eb-garamond/400-italic.css";
+@import "@fontsource/eb-garamond/500.css";
+@import "@fontsource/eb-garamond/600.css";
+@import "./tokens.css";
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { scroll-behavior: smooth; }
+html, body { min-height: 100%; }
+
+body {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);
+  line-height: 1.6;
+  color: var(--bone);
+  background: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg, video { display: block; max-width: 100%; height: auto; }
+button { font: inherit; cursor: pointer; }
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--gold);
+}
+a:hover { text-decoration-thickness: 2px; text-decoration-color: currentColor; }
+a:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 2px; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: var(--type-tracking-display);
+}
+h1 { font-size: clamp(2.75rem, 4vw + 1.5rem, 6rem); }
+h2 { font-size: clamp(2rem, 2.5vw + 1rem, 3.75rem); }
+h3 { font-size: clamp(1.5rem, 1.5vw + 0.75rem, 2.25rem); }
+h4 { font-size: 1.25rem; }
+p { max-width: 60ch; }
+
+.section { padding-block: var(--section-pad-y); }
+.section--ink { background: var(--ink); color: var(--bone); }
+.section--bone { background: var(--bone); color: var(--ink); }
+.section--bone a { text-decoration-color: var(--gold-muted); }
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+.container--narrow { max-width: var(--container-narrow); }
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: var(--type-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+.section--bone .eyebrow { color: var(--gold-muted); }
+
+.dot-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em 0;
+  align-items: center;
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+.dot-list li + li::before {
+  content: "·";
+  margin-inline: 0.75em;
+  color: var(--gold);
+}
+.section--bone .dot-list li + li::before { color: var(--gold-muted); }
+
+.button {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  padding: 0.85rem 1.5rem;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  text-decoration: none;
+  transition: background 120ms ease, color 120ms ease;
+}
+.button:hover { background: var(--gold); color: var(--ink); }
+.button--filled { background: var(--gold); color: var(--ink); }
+.button--filled:hover { background: transparent; color: var(--gold); }
+.section--bone .button { color: var(--gold-muted); border-color: var(--gold-muted); }
+.section--bone .button:hover { background: var(--gold-muted); color: var(--bone); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0.5rem;
+  background: var(--gold);
+  color: var(--ink);
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  z-index: 100;
+}
+.skip-link:focus { left: 0.5rem; }
