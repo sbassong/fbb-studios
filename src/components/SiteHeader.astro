@@ -21,7 +21,7 @@ const links = [
 ---
 <header class="site-header">
   <div class="site-header__inner container">
-    <a class="site-header__brand" href={prefix === '' ? '/' : `${prefix}/`} aria-label="FBB Studios — accueil">
+    <a class="site-header__brand" href={prefix === '' ? '/' : `${prefix}/`} aria-label={lang === 'fr' ? 'FBB Studios — accueil' : 'FBB Studios — home'}>
       <span class="site-header__wordmark" aria-hidden="true">FBB</span>
       <span class="site-header__sub">Studios</span>
     </a>
