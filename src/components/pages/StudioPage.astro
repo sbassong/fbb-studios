@@ -48,11 +48,11 @@ const teamHeading = lang === 'fr' ? 'Équipe' : 'Team';
           </dd>
         </div>
       )}
-      {dla.castingEmail && (
+      {studio.contact.email && (
         <div class="studio-page__contact-item">
-          <dt>{t.studioPage.castingEmailLabel}</dt>
+          <dt>{t.studioPage.emailLabel}</dt>
           <dd>
-            <a href={`mailto:${dla.castingEmail}`}>{dla.castingEmail}</a>
+            <a href={`mailto:${studio.contact.email}`}>{studio.contact.email}</a>
           </dd>
         </div>
       )}

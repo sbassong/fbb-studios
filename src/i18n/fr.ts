@@ -16,15 +16,17 @@ export const fr = {
   hero: {
     eyebrow: "Maison de production · San Francisco",
     title: "FBB Studios",
-    body: "Nous produisons des récits originaux pour le public francophone, à la croisée du continent et de sa diaspora.",
+    body: "L'Afrique comme vous ne l'avez jamais vue. Chez FBB Studios, nous racontons l'Afrique avec passion - ses pays, ses gens, sa beauté. Des récits chaleureux, modernes et sincères qui vous feront du bien.",
     aboutCta: "À propos du studio",
   },
   studioPage: {
     eyebrow: "À propos",
     title: "Le studio",
-    contactHeading: "Travailler avec nous",
-    contactBody: "Presse, collaboration et casting — appelez-nous directement.",
+    contactHeading: "Parlons.",
+    contactBody:
+      "Presse, casting, collaborations — nous serions ravis d'échanger.",
     phoneLabel: "Téléphone",
+    emailLabel: "Email",
     castingEmailLabel: "Casting DLA",
   },
   footer: {

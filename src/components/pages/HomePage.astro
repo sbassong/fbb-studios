@@ -12,8 +12,8 @@ const studio = await getStudio(lang);
 
 const talkHeading = lang === 'fr' ? 'Parlons.' : "Let's talk.";
 const talkBody = lang === 'fr'
-  ? 'Presse, casting, collaborations — appelez-nous directement.'
-  : 'Press, casting, collaboration — call us directly.';
+  ? 'Presse, casting, collaborations — nous serions ravis d\'échanger.'
+  : 'Press, casting, collaborations — we\'d love to connect.';
 ---
 <section class="section section--ink home-hero">
   <Image class="home-hero__bg" src={heroImg} alt="" aria-hidden="true" fetchpriority="high" loading="eager" widths={[800, 1200, 1920]} sizes="100vw" />
@@ -38,11 +38,18 @@ const talkBody = lang === 'fr'
     <p class="eyebrow">{lang === 'fr' ? 'Contact' : 'Contact'}</p>
     <h2 class="home-talk__heading">{talkHeading}</h2>
     <p class="home-talk__body">{talkBody}</p>
-    {studio.contact.phone && (
-      <a class="home-talk__phone" href={`tel:${studio.contact.phone.replace(/[\s-]/g, '')}`}>
-        {studio.contact.phone}
-      </a>
-    )}
+    <div class="home-talk__contacts">
+      {studio.contact.phone && (
+        <a class="home-talk__phone" href={`tel:${studio.contact.phone.replace(/[\s-]/g, '')}`}>
+          {studio.contact.phone}
+        </a>
+      )}
+      {studio.contact.email && (
+        <a class="home-talk__email" href={`mailto:${studio.contact.email}`}>
+          {studio.contact.email}
+        </a>
+      )}
+    </div>
   </div>
 </section>
 
@@ -126,5 +133,22 @@ const talkBody = lang === 'fr'
     border-bottom: 1px solid var(--gold-muted);
     padding-bottom: 2px;
   }
+  .home-talk__contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
   .home-talk__phone:hover { color: var(--bone); border-color: var(--bone); }
+  .home-talk__email {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 1.5vw + 0.5rem, 1.35rem);
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    border-bottom: 1px solid var(--gold-muted);
+    padding-bottom: 2px;
+  }
+  .home-talk__email:hover { color: var(--bone); border-color: var(--bone); }
 </style>

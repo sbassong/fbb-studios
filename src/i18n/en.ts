@@ -18,15 +18,16 @@ export const en: Dictionary = {
   hero: {
     eyebrow: "Production house · San Francisco",
     title: "FBB Studios",
-    body: "We produce original stories for a Francophone audience at the crossroads of the continent and its diaspora.",
+    body: "Africa like you've never seen it. At FBB Studios, we tell Africa's story with passion — its countries, its people, its beauty. Warm, modern, and sincere stories that will do you good.",
     aboutCta: "About the studio",
   },
   studioPage: {
     eyebrow: "About",
     title: "The studio",
-    contactHeading: "Work with us",
-    contactBody: "Press, collaboration, and casting — call us directly.",
+    contactHeading: "Let's talk.",
+    contactBody: "Press, casting, collaborations — we'd love to connect.",
     phoneLabel: "Phone",
+    emailLabel: "Email",
     castingEmailLabel: "DLA Casting",
   },
   footer: {
