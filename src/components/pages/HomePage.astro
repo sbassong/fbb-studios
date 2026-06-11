@@ -21,9 +21,13 @@ const talkBody = lang === 'fr'
   <div class="container">
     <p class="eyebrow">{t.hero.eyebrow}</p>
     <h1 class="home-hero__title" aria-label="FBB Studios">
-      <span aria-hidden="true">F</span><span aria-hidden="true">B</span><span aria-hidden="true" class="home-hero__title-mirror">B</span>
+      <span class="home-hero__fbb" aria-hidden="true">
+        <span>F</span><span>B</span><span class="home-hero__title-mirror">B</span>
+      </span>
+      <span class="home-hero__studios" aria-hidden="true">
+        {['S','T','U','D','I','O','S'].map(c => <span>{c}</span>)}
+      </span>
     </h1>
-    <p class="home-hero__name">Studios</p>
     <p class="home-hero__body">{t.hero.body}</p>
     <div class="home-hero__ctas">
       <a class="button" href={prefix === '' ? '/studio' : `${prefix}/studio`}>{t.hero.aboutCta}</a>
@@ -80,23 +84,27 @@ const talkBody = lang === 'fr'
     z-index: 1;
   }
   .home-hero__title {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
     font-size: clamp(5rem, 16vw, 14rem);
     color: var(--gold);
     line-height: 1;
     letter-spacing: 0.02em;
-    margin-block: 0.3em 0.15em;
-    display: flex;
-    gap: 0.05em;
+    margin-block: 0.3em 2rem;
   }
+  .home-hero__fbb { display: flex; gap: 0; }
   .home-hero__title-mirror { display: inline-block; transform: scaleX(-1); }
-  .home-hero__name {
+  .home-hero__studios {
+    display: flex;
+    justify-content: space-between;
+    font-size: clamp(1.2rem, 1rem + 0.6vw, 1.65rem);
     font-family: var(--font-display);
-    font-size: 0.95rem;
-    font-weight: 500;
-    letter-spacing: var(--type-tracking-eyebrow);
+    font-weight: 600;
+    letter-spacing: 0;
     text-transform: uppercase;
-    color: var(--gold-muted);
-    margin-bottom: 2rem;
+    color: var(--gold-dim);
+    margin-top: 0.05rem;
   }
   .home-hero__body {
     font-family: var(--font-display);

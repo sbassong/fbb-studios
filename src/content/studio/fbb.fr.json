@@ -4,10 +4,19 @@
   "mission": "FBB Studios est une maison de production indépendante.\n\nNous racontons des histoires contemporaines ancrées dans l'Afrique d'aujourd'hui et sa diaspora.Des récits humains, sincères et lumineux qui reflètent la beauté du quotidien, la force des liens et la richesse de notre continent.\n\nNotre premier projet, DLA, est actuellement en casting.",
   "founders": [
     {
-      "name": "Francesca Bassong",
-      "role": "Fondatrice · Productrice",
-      "bio": "Bio est à venir.",
+      "name": "Francesca B.",
+      "role": "Fondatrice · Productrice Executive",
       "photo": "/team/lady-trav.jpg"
+    },
+    {
+      "name": "Laneia M.B.",
+      "role": "Productrice Executive",
+      "photo": "/team/lady-1.png"
+    },
+    {
+      "name": "Samuel B.",
+      "role": "Technologie",
+      "photo": "/team/black-4.png"
     }
   ],
   "contact": { "email": "productiondlaseries@gmail.com", "phone": "+1 341-213-9496" },

@@ -23,8 +23,10 @@ const links = [
 <header class="site-header">
   <div class="site-header__inner container">
     <a class="site-header__brand" href={prefix === '' ? '/' : `${prefix}/`} aria-label={lang === 'fr' ? 'FBB Studios — accueil' : 'FBB Studios — home'}>
-      <span class="site-header__wordmark" aria-hidden="true">FBB</span>
-      <span class="site-header__sub">Studios</span>
+      <span class="site-header__wordmark" aria-hidden="true">FB<span class="site-header__mirror">B</span></span>
+      <span class="site-header__sub" aria-hidden="true">
+        {['S','T','U','D','I','O','S'].map(c => <span>{c}</span>)}
+      </span>
     </a>
     <nav class="site-header__nav" aria-label={t.nav.primaryAria}>
       <ul>
@@ -63,21 +65,28 @@ const links = [
   }
   .site-header__brand {
     display: inline-flex;
-    align-items: baseline;
-    gap: 0.5rem;
+    flex-direction: column;
+    align-items: stretch;
     text-decoration: none;
     color: var(--gold);
     font-family: var(--font-display);
     font-weight: 600;
     font-size: 1.5rem;
     letter-spacing: 0.04em;
+    line-height: 1;
   }
   .site-header__brand:hover { color: var(--bone); }
+  .site-header__mirror { display: inline-block; transform: scaleX(-1); }
   .site-header__sub {
-    font-size: 0.7rem;
-    letter-spacing: var(--type-tracking-eyebrow);
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6rem;
+    letter-spacing: 0;
     text-transform: uppercase;
     color: var(--gold-dim);
+    font-family: var(--font-display);
+    font-weight: 500;
+    margin-top: 0;
   }
   .site-header__nav { margin-inline-start: auto; }
   .site-header__nav ul {
