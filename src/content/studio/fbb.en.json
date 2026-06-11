@@ -2,7 +2,14 @@
   "name": "FBB Studios",
   "tagline": "Production house · San Francisco",
   "mission": "FBB Studios is an independent production house.\n\nWe tell contemporary stories rooted in Africa today and its diaspora. Human, sincere, and luminous stories that reflect the beauty of everyday life, the strength of bonds, and the richness of our continent.\n\nOur first project, DLA, is currently in casting.",
-  "founders": [],
+  "founders": [
+    {
+      "name": "Francesca Bassong",
+      "role": "Founder · Producer",
+      "bio": "Bio coming soon.",
+      "photo": "/team/lady-trav.jpg"
+    }
+  ],
   "contact": { "email": "productiondlaseries@gmail.com", "phone": "+1 341-213-9496" },
   "social": {
     "instagram": "https://www.instagram.com/FBB_STUDIOS/"

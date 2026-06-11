@@ -24,6 +24,9 @@ const teamHeading = lang === 'fr' ? 'Équipe' : 'Team';
       <ul class="studio-page__team">
         {studio.founders.map((person) => (
           <li class="studio-page__person">
+            {person.photo && (
+              <img class="studio-page__person-photo" src={person.photo} alt={person.name} />
+            )}
             <h3>{person.name}</h3>
             <p class="studio-page__role">{person.role}</p>
             {person.bio && <p class="studio-page__bio">{person.bio}</p>}
@@ -74,6 +77,16 @@ const teamHeading = lang === 'fr' ? 'Équipe' : 'Team';
     display: grid;
     gap: 2.5rem;
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  }
+  .studio-page__person-photo {
+    width: 100%;
+    max-width: 14rem;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    display: block;
   }
   .studio-page__person h3 { color: var(--ink); margin-bottom: 0.25rem; }
   .studio-page__role {

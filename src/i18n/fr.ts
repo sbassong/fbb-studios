@@ -8,6 +8,7 @@ export const fr = {
   nav: {
     home: "Accueil",
     studio: "Le studio",
+    projects: "Projets",
     skipToContent: "Aller au contenu principal",
     languageToggle: "English",
     languageToggleAria: "Switch to English",
@@ -18,6 +19,10 @@ export const fr = {
     title: "FBB Studios",
     body: "L'Afrique comme vous ne l'avez jamais vue. Chez FBB Studios, nous racontons l'Afrique avec passion - ses pays, ses gens, sa beauté. Des récits chaleureux, modernes et sincères qui vous feront du bien.",
     aboutCta: "À propos du studio",
+  },
+  projectsPage: {
+    eyebrow: "Nos projets",
+    title: "Projets",
   },
   studioPage: {
     eyebrow: "À propos",

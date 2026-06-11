@@ -15,6 +15,7 @@ const studio = defineCollection({
           name: z.string(),
           role: z.string(),
           bio: z.string().optional(),
+          photo: z.string().optional(),
         }),
       )
       .default([]),

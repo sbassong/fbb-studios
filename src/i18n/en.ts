@@ -10,6 +10,7 @@ export const en: Dictionary = {
   nav: {
     home: "Home",
     studio: "Studio",
+    projects: "Projects",
     skipToContent: "Skip to main content",
     languageToggle: "Français",
     languageToggleAria: "Passer en français",
@@ -20,6 +21,10 @@ export const en: Dictionary = {
     title: "FBB Studios",
     body: "Africa like you've never seen it. At FBB Studios, we tell Africa's story with passion — its countries, its people, its beauty. Warm, modern, and sincere stories that will do you good.",
     aboutCta: "About the studio",
+  },
+  projectsPage: {
+    eyebrow: "Our projects",
+    title: "Projects",
   },
   studioPage: {
     eyebrow: "About",
