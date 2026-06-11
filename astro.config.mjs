@@ -1,8 +1,11 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
   site: 'https://fbbstudios.com',
+
   i18n: {
     defaultLocale: 'fr',
     locales: ['fr', 'en'],
@@ -11,5 +14,7 @@ export default defineConfig({
       redirectToDefaultLocale: false,
     },
   },
+
   integrations: [sitemap({ i18n: { defaultLocale: 'fr', locales: { fr: 'fr-FR', en: 'en-US' } } })],
+  adapter: cloudflare()
 });
