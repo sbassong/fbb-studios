@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectsPage from '../../components/pages/ProjectsPage.astro';
+import { useTranslations, getLangFromUrl } from '../../i18n';
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+<BaseLayout routePath="/projects" title={t.projectsPage.title}>
+  <ProjectsPage />
+</BaseLayout>

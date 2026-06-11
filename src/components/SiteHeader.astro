@@ -17,6 +17,7 @@ const otherRoute = routePath === '/' ? `${otherPrefix}/` : `${otherPrefix}${rout
 const links = [
   { href: prefix === '' ? '/' : `${prefix}/`, label: t.nav.home, route: '/' },
   { href: `${prefix}/studio`, label: t.nav.studio, route: '/studio' },
+  { href: `${prefix}/projects`, label: t.nav.projects, route: '/projects' },
 ] as const;
 ---
 <header class="site-header">

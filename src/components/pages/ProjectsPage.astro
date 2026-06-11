@@ -1,0 +1,158 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n';
+import { getDla } from '../../i18n/content';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const dla = await getDla(lang);
+const taglineParts = dla.tagline.split(/\s*·\s*/);
+
+---
+
+<section class="section section--ink projects-intro">
+  <div class="container">
+    <p class="eyebrow">{t.projectsPage.eyebrow}</p>
+  </div>
+</section>
+
+<section class="project-feature" aria-labelledby="project-dla-title">
+  <img
+    class="project-feature__bg"
+    src="/projects/dla-3-women.jpg"
+    alt=""
+    aria-hidden="true"
+    loading="eager"
+  />
+  <div class="project-feature__overlay" aria-hidden="true"></div>
+  <div class="container project-feature__content">
+    <p class="eyebrow">A FBB Studios Production</p>
+    <h2 id="project-dla-title" class="project-feature__title">{dla.title}</h2>
+    <ul class="dot-list project-feature__tagline">
+      {taglineParts.map((part) => <li>{part}</li>)}
+    </ul>
+    <span class="project-feature__status">{dla.statusLabel}</span>
+    <p class="project-feature__logline">{dla.logline}</p>
+    {dla.status === 'casting' && dla.castingEmail && (
+      <p class="project-feature__casting">
+        <a href={`mailto:${dla.castingEmail}`}>{dla.castingEmail}</a>
+      </p>
+    )}
+    {dla.status === 'post' && dla.trailerUrl && (
+      <a class="button" href={dla.trailerUrl} rel="noopener" target="_blank">
+        {lang === 'fr' ? 'Voir la bande-annonce' : 'Watch the trailer'}
+      </a>
+    )}
+    {dla.status === 'released' && dla.watchLinks.length > 0 && (
+      <ul class="project-feature__watch">
+        {dla.watchLinks.map((link) => (
+          <li><a class="button" href={link.url} rel="noopener" target="_blank">{link.label}</a></li>
+        ))}
+      </ul>
+    )}
+  </div>
+</section>
+
+
+<style>
+  .projects-intro {
+    padding-block: clamp(2rem, 4vw, 3.5rem) clamp(1rem, 2vw, 1.75rem);
+  }
+  .projects-intro__title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    color: var(--gold);
+    margin-block: 0.3em 0;
+  }
+
+  .project-feature {
+    position: relative;
+    min-height: clamp(500px, 65vh, 760px);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .project-feature__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+  .project-feature__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        to right,
+        var(--ink) 0%,
+        transparent max(calc((100% - var(--container-max)) / 2 + var(--container-pad)), var(--container-pad)),
+        transparent calc(100% - max(calc((100% - var(--container-max)) / 2 + var(--container-pad)), var(--container-pad))),
+        var(--ink) 100%
+      ),
+      linear-gradient(
+        to top,
+        rgba(10, 9, 8, 0.97) 0%,
+        rgba(10, 9, 8, 0.72) 40%,
+        rgba(10, 9, 8, 0.28) 70%,
+        rgba(10, 9, 8, 0.12) 100%
+      );
+  }
+  .project-feature__content {
+    position: relative;
+    z-index: 1;
+    padding-block: clamp(3rem, 5vw, 5rem);
+    color: var(--bone);
+  }
+  .project-feature__title {
+    font-size: clamp(5rem, 16vw, 12rem);
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    margin-block: 0.25em 0.15em;
+  }
+  .project-feature__tagline {
+    font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.1rem);
+    opacity: 0.85;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+  }
+  .project-feature__status {
+    display: inline-block;
+    border: 1px solid var(--gold-muted);
+    color: var(--gold-muted);
+    padding: 0.35rem 0.95rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    letter-spacing: var(--type-tracking-eyebrow);
+    text-transform: uppercase;
+    font-family: var(--font-display);
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+  .project-feature__logline {
+    font-size: clamp(1.1rem, 1rem + 0.5vw, 1.4rem);
+    line-height: 1.5;
+    max-width: 52ch;
+    font-family: var(--font-display);
+    font-style: italic;
+    margin-bottom: 1.75rem;
+  }
+  .project-feature__casting {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+  }
+  .project-feature__casting a {
+    color: var(--gold-muted);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+  }
+  .project-feature__casting a:hover { color: var(--bone); }
+  .project-feature__watch {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+</style>
