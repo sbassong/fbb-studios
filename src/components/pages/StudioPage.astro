@@ -10,7 +10,7 @@ const missionParas = studio.mission.split('\n\n');
 const teamHeading = lang === 'fr' ? 'Équipe' : 'Team';
 ---
 <section class="section section--ink">
-  <div class="container container--narrow">
+  <div class="container">
     <p class="eyebrow">{t.studioPage.eyebrow}</p>
     <h1>{t.studioPage.title}</h1>
     {missionParas.map((para) => <p class="studio-page__para">{para}</p>)}
@@ -38,7 +38,7 @@ const teamHeading = lang === 'fr' ? 'Équipe' : 'Team';
 )}
 
 <section class={`section section--ink${studio.founders.length === 0 ? ' studio-page__contact--no-team' : ''}`}>
-  <div class="container container--narrow">
+  <div class="container">
     <p class="eyebrow">Contact</p>
     <h2 class="studio-page__contact-heading">{t.studioPage.contactHeading}</h2>
     <p>{t.studioPage.contactBody}</p>
